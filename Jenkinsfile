@@ -22,11 +22,7 @@ pipeline {
                     sh './deploy.sh'
                 }
                 }
-               } 
-            }
-        }
-    }
-
+            } 
         }
     }
 }
