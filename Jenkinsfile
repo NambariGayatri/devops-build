@@ -26,6 +26,7 @@ pipeline {
             steps {
                script {
                    withDockerRegistry(credentialsId: '9cb9951e-ace0-402a-a217-6ce5f94199d1', toolName: 'docker') {
+                   sh 'chmod +x deploy.sh'
                    sh './deploy.sh'
                 }
             } 
