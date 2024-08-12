@@ -5,10 +5,15 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                script {
-                   withDockerRegistry(credentialsId: '9cb9951e-ace0-402a-a217-6ce5f94199d1', toolName: 'docker') {
+                  withDockerRegistry(credentialsId: '407337d2-dbd1-4eda-82eb-93d4fe5f1b18', toolName: 'Docker', url: 'https://hub.docker.com/') {
                     sh 'chmod +x build.sh'
                     sh './build.sh'
-                    sh 'docker tag nginx-app gayatridevops11/finalapp-dev:latest'
+                    if [[ $GIT_BRANCH == "origin/dev" ]] {
+                     sh 'docker tag nginx-app gayatridevops11/finalapp-dev:latest'
+                    }
+                    else if [[ $GIT_BRANCH == "origin/main" ]] {
+                     sh 'docker tag nginx-app gayatridevops11/finalapp-prod:latest'
+                    }
                 }
                 }
                }
@@ -16,23 +21,29 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                script {
-                   withDockerRegistry(credentialsId: '9cb9951e-ace0-402a-a217-6ce5f94199d1', toolName: 'docker') {
-                    sh 'docker push gayatridevops11/finalapp-dev:latest' 
+                   withDockerRegistry(credentialsId: '407337d2-dbd1-4eda-82eb-93d4fe5f1b18', toolName: 'Docker', url: 'https://hub.docker.com/') {
+                    if [[ $GIT_BRANCH == "origin/dev" ]] {
+                        sh 'docker push gayatridevops11/finalapp-dev:latest'
+                    } 
+                    else if [[ $GIT_BRANCH == "origin/main" ]] {
+                     sh 'docker push gayatridevops11/finalapp-prod:latest'
                 }
                 }
             }
         } 
+        }
         stage('Deploy Docker Image') {
             steps {
                script {
-                   withDockerRegistry(credentialsId: '9cb9951e-ace0-402a-a217-6ce5f94199d1', toolName: 'docker') {
+                   withDockerRegistry(credentialsId: '407337d2-dbd1-4eda-82eb-93d4fe5f1b18', toolName: 'Docker', url: 'https://hub.docker.com/'){
                    sh 'chmod +x deploy.sh'
                    sh './deploy.sh'
                 }
             } 
         }
     }
+
+    }
 }
 
-}
 
