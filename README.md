@@ -6,6 +6,6 @@ GitHub Repo url : https://github.com/NambariGayatri/devops-build.git
 
 Deployed site URL: http://ec2-3-128-95-199.us-east-2.compute.amazonaws.com/ 
 
-3. DockerImage
+3.DockerImage
 
 DockerImage: nginx-app
