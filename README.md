@@ -1,6 +1,6 @@
 1.GitHub
 
-GitHub Repo url : https://github.com/NambariGayatri/devops-build.git
+GitHub Repo url : https://github.com/NambariGayatri/devops-build.git with Branches - main and dev
 
 2.Deployed Site
 
