@@ -1,7 +1,5 @@
 1.GitHub
 
-Created a repo called devops-build in git
-
 GitHub Repo url : https://github.com/NambariGayatri/devops-build.git
 
 2.Deployed Site:
